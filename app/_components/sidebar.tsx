@@ -1,13 +1,25 @@
+"use client";
+import { LayoutGridIcon, ShoppingBasketIcon, PackageIcon } from "lucide-react";
+import SidebarButton from "./sidebar-button";
+
 const Sidebar = () => {
   return (
-    <div className="flex w-64 flex-col bg-blue-50">
+    <div className="flex w-64 flex-col bg-blue-100">
       <div className="px-8 py-6">
         <h1 className="text-2xl font-bold uppercase text-blue-400">stockly</h1>
       </div>
       <div className="flex flex-col space-y-2 p-2">
-        <button className="px-6 py-3">Dashboard</button>
-        <button className="px-6 py-3">Produtos</button>
-        <button className="px-6 py-3">Vendas</button>
+        <SidebarButton icon={<LayoutGridIcon />} href="/" value="Dashboard" />
+        <SidebarButton
+          icon={<PackageIcon />}
+          href="/products"
+          value="Produtos"
+        />
+        <SidebarButton
+          icon={<ShoppingBasketIcon />}
+          href="/sales"
+          value="Vendas"
+        />
       </div>
     </div>
   );
