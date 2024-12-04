@@ -1,5 +1,28 @@
-const ProductsPage = () => {
-    return ( <h1>Products page</h1> );
-}
- 
+import { db } from "../_lib/prisma";
+
+import { PlusIcon } from "lucide-react";
+import { Button } from "../_components/ui/button";
+import { DataTable } from "../_components/ui/data-table";
+import { productTableColumns } from "./_components/table-columns";
+
+const ProductsPage = async () => {
+  const products = await db.product.findMany();
+  return (
+    <div className="spacy-y-8 m-8 w-full rounded-lg bg-slate-100 p-8">
+      <div className="mb-2 flex w-full items-center justify-between">
+        <div className="space-y-1">
+          <span className="text-xs font-semibold text-blue-500">
+            Gestão de Produtos
+          </span>
+          <h2 className="text xl font-semibold">Produtos</h2>
+        </div>
+        <Button variant={"outline"} className="gap-2">
+          <PlusIcon size={20} /> Novo produto
+        </Button>
+      </div>
+      <DataTable columns={productTableColumns} data={products} />
+    </div>
+  );
+};
+
 export default ProductsPage;
