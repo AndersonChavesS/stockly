@@ -31,6 +31,7 @@ export const productTableColumns: ColumnDef<Product>[] = [
     header: "Status",
     cell: (row) => {
       const product = row.row.original;
+      // @ts-expect-error - status is a string
       const label = getStatusLabel(product.status);
       return (
         <Badge variant={label === "Disponível" ? "default" : "destructive"} className="gap-1.5">
