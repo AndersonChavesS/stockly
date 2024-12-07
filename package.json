@@ -9,7 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.9.1",
     "@prisma/client": "^6.0.0",
+    "@radix-ui/react-dialog": "^1.1.2",
+    "@radix-ui/react-label": "^2.1.0",
     "@radix-ui/react-slot": "^1.1.0",
     "@tanstack/react-table": "^8.20.5",
     "class-variance-authority": "^0.7.1",
@@ -18,10 +21,13 @@
     "next": "14.2.10",
     "react": "^18",
     "react-dom": "^18",
+    "react-hook-form": "^7.54.0",
+    "react-number-format": "^5.4.2",
     "server-only": "^0.0.1",
     "stockly": "file:",
     "tailwind-merge": "^2.5.5",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@types/node": "^20.17.9",

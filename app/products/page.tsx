@@ -1,13 +1,12 @@
-import { PlusIcon } from "lucide-react";
-import { Button } from "../_components/ui/button";
-import { DataTable } from "../_components/ui/data-table";
-import { productTableColumns } from "./_components/table-columns";
-import { getProducts } from "../_data-access/product/get-products";
+import { DataTable } from "@/app/_components/ui/data-table";
+import { productTableColumns } from "@/app/products/_components/table-columns";
+import { cachedGetProducts } from "@/app/_data-access/product/get-products";
+import AddProductButton from "@/app/products/_components/add-product-button";
 
 const ProductsPage = async () => {
-  const products = await getProducts();
+  const products = await cachedGetProducts();
   return (
-    <div className="spacy-y-8 m-8 w-full rounded-lg bg-slate-100 p-8">
+    <div className="m-8 w-full space-y-8 rounded-lg bg-slate-100 p-8">
       <div className="mb-2 flex w-full items-center justify-between">
         <div className="space-y-1">
           <span className="text-xs font-semibold text-blue-500">
@@ -15,14 +14,10 @@ const ProductsPage = async () => {
           </span>
           <h2 className="text xl font-semibold">Produtos</h2>
         </div>
-        <Button variant={"outline"} className="gap-2">
-          <PlusIcon size={20} /> Novo produto
-        </Button>
+        <AddProductButton />
       </div>
-      <DataTable
-        columns={productTableColumns}
-        data={JSON.parse(JSON.stringify(products))}
-      />
+
+      <DataTable columns={productTableColumns} data={products} />
     </div>
   );
 };

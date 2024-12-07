@@ -3,7 +3,8 @@ import { db } from "@/app/_lib/prisma";
 // Apenas para referência
 export async function GET() {
   const products = await db.product.findMany({});
-  return Response.json(products, { status: 200 });
+  const randomNumber = Math.random();
+  return Response.json({products, randomNumber}, { status: 200 });
 }
 
 export async function POST(request: Request) {
