@@ -31,12 +31,19 @@ export const productTableColumns: ColumnDef<Product>[] = [
     header: "Status",
     cell: (row) => {
       const product = row.row.original;
+      // @ts-expect-error - status is a string
       const label = getStatusLabel(product.status);
       return (
-        <Badge variant={label === "Disponível" ? "default" : "destructive"} className="gap-1.5">
+        <Badge
+          className={
+            label === "Disponível"
+              ? "w-28 gap-1.5 bg-green-700"
+              : "w-28 gap-1.5 bg-red-700"
+          }
+        >
           <Circle
             size={10}
-            className={`${label == "Disponível" ? "fill-primary-foreground" : "fill-destructive-foreground"}`}
+            className={`${label === "Disponível" ? "fill-primary-foreground" : "fill-destructive-foreground"}`}
           />
           {label}
         </Badge>

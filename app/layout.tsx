@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Sidebar from "./_components/sidebar";
+import Sidebar from "@/app/_components/sidebar";
 import { Inter } from "next/font/google";
 
 export const metadata: Metadata = {
