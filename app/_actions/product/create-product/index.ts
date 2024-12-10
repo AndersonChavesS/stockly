@@ -1,7 +1,7 @@
 "use server";
 
 import { db } from "@/app/_lib/prisma";
-import { revalidatePath } from "next/cache";
+import { revalidateTag } from "next/cache";
 import { createProductSchema, CreateProductSchema } from "./schema";
 
 export const createProduct = async (data: CreateProductSchema) => {
@@ -9,5 +9,5 @@ export const createProduct = async (data: CreateProductSchema) => {
   await db.product.create({
     data,
   });
-  revalidatePath("/products");
+  revalidateTag("get-products");
 };
