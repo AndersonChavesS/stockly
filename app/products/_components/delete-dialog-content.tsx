@@ -20,10 +20,10 @@ const DeleteProductDialogContent = ({
   const handleContinueClick = async () => {
     try {
       await deleteProduct({ id: productId });
-      toast.success("Produto excluido com sucesso.")
+      toast.success("Produto excluido com sucesso.");
     } catch (error) {
       console.error(error);
-      toast.error("Ocorreu um erro ao tentar excluir um produto.")
+      toast.error("Ocorreu um erro ao tentar excluir um produto.");
     }
   };
 
@@ -37,8 +37,13 @@ const DeleteProductDialogContent = ({
         </AlertDialogDescription>
       </AlertDialogHeader>
       <AlertDialogFooter>
-        <AlertDialogCancel>Cancelar</AlertDialogCancel>
-        <AlertDialogAction onClick={handleContinueClick}>
+        <AlertDialogCancel className="bg-blue-700 text-white duration-300 hover:bg-blue-500 hover:text-white">
+          Cancelar
+        </AlertDialogCancel>
+        <AlertDialogAction
+          onClick={handleContinueClick}
+          className="bg-orange-700 duration-300 hover:bg-orange-500"
+        >
           Continuar
         </AlertDialogAction>
       </AlertDialogFooter>

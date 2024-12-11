@@ -59,7 +59,7 @@ const ProductTableDropdownMenu = ({
                   Editar
                 </DropdownMenuItem>
               </DialogTrigger>
-              <AlertDialogTrigger asChild>
+              <AlertDialogTrigger asChild >
                 <DropdownMenuItem className="gap-1.5">
                   <TrashIcon size={16} />
                   Deletar
