@@ -74,6 +74,9 @@ const UpsertSheetContent = ({
     },
   });
 
+  const messageErrorStock =
+    "A quantidade solicitada excede o estoque disponível.";
+
   const onSubmit = (data: FormSchema) => {
     const selectedProduct = products.find(
       (product) => product.id === data.productId,
@@ -84,12 +87,38 @@ const UpsertSheetContent = ({
         (product) => product.id === selectedProduct.id,
       );
       if (existingProduct) {
+        const productIsOutOfStock =
+          existingProduct.quantity + data.quantity > selectedProduct.stock;
+        if (productIsOutOfStock) {
+          form.setError("quantity", {
+            message: messageErrorStock,
+          });
+
+          setTimeout(() => {
+            form.clearErrors("quantity");
+            form.reset();
+          }, 3000);
+
+          return currentProducts;
+        }
         return currentProducts.map((product) => {
           if (product.id === selectedProduct.id) {
             return { ...product, quantity: product.quantity + data.quantity };
           }
           return product;
         });
+      }
+      const productIsOutOfStock = data.quantity > selectedProduct.stock;
+      if (productIsOutOfStock) {
+        form.setError("quantity", {
+          message: messageErrorStock,
+        });
+
+        setTimeout(() => {
+          form.clearErrors("quantity");
+          form.reset();
+        }, 3000);
+        return currentProducts;
       }
       return [
         ...currentProducts,
@@ -100,7 +129,6 @@ const UpsertSheetContent = ({
         },
       ];
     });
-    form.reset();
   };
 
   const productsTotal = useMemo(() => {
@@ -192,7 +220,7 @@ const UpsertSheetContent = ({
                 {formatCurrency(product.price * product.quantity)}
               </TableCell>
               <TableCell>
-                <SalesTableDropdowMenu product={product} onDelete={onDelete}/>
+                <SalesTableDropdowMenu product={product} onDelete={onDelete} />
               </TableCell>
               <TableCell></TableCell>
             </TableRow>
