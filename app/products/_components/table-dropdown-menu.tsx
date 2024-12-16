@@ -31,11 +31,11 @@ interface ProductTableDropdownMenuProps {
 const ProductTableDropdownMenu = ({
   product,
 }: ProductTableDropdownMenuProps) => {
-  const [editDialogOpen, setEditDialogOpen] = useState(false);
+  const [editDialogIsOpen, setEditDialogIsOpen] = useState(false);
   return (
     <>
       <AlertDialog>
-        <Dialog open={editDialogOpen} onOpenChange={setEditDialogOpen}>
+        <Dialog open={editDialogIsOpen} onOpenChange={setEditDialogIsOpen}>
           <DropdownMenu>
             <DropdownMenuTrigger>
               <MoreHorizontalIcon size={16} />
@@ -59,7 +59,7 @@ const ProductTableDropdownMenu = ({
                   Editar
                 </DropdownMenuItem>
               </DialogTrigger>
-              <AlertDialogTrigger asChild >
+              <AlertDialogTrigger asChild>
                 <DropdownMenuItem className="gap-1.5">
                   <TrashIcon size={16} />
                   Deletar
@@ -74,7 +74,7 @@ const ProductTableDropdownMenu = ({
               price: Number(product.price),
               stock: product.stock,
             }}
-            onSuccess={() => setEditDialogOpen(false)}
+            setDialogIsOpen={setEditDialogIsOpen}
           />
           <DeleteProductDialogContent productId={product.id} />
         </Dialog>
