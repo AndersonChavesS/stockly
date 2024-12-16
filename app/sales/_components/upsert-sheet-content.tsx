@@ -35,7 +35,7 @@ import { Dispatch, SetStateAction, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { formatCurrency } from "../../_helpers/currency";
-import SalesTableDropdowMenu from "./table-dropdown-menu";
+import UpsertSaleTableDropdowMenu from "./upsert-table-dropdown-menu";
 import { createSale } from "@/app/_actions/sale/create-sale";
 import { toast } from "sonner";
 import { useAction } from "next-safe-action/hooks";
@@ -248,7 +248,7 @@ const UpsertSheetContent = ({
                 {formatCurrency(product.price * product.quantity)}
               </TableCell>
               <TableCell>
-                <SalesTableDropdowMenu product={product} onDelete={onDelete} />
+                <UpsertSaleTableDropdowMenu product={product} onDelete={onDelete} />
               </TableCell>
               <TableCell></TableCell>
             </TableRow>
