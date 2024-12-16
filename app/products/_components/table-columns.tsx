@@ -1,11 +1,11 @@
 "use client";
 
-import { Product } from "@prisma/client";
 import { ColumnDef } from "@tanstack/react-table";
 
 import { Badge } from "../../_components/ui/badge";
 import { Circle } from "lucide-react";
 import ProductTableDropdownMenu from "./table-dropdown-menu";
+import { ProductDto } from "@/app/_data-access/product/get-products";
 
 const getStatusLabel = (status: string) => {
   if (status === "IN_STOCK") {
@@ -14,7 +14,7 @@ const getStatusLabel = (status: string) => {
   return "Indisponível";
 };
 
-export const productTableColumns: ColumnDef<Product>[] = [
+export const productTableColumns: ColumnDef<ProductDto>[] = [
   {
     accessorKey: "name",
     header: "Produto",
@@ -39,14 +39,15 @@ export const productTableColumns: ColumnDef<Product>[] = [
     header: "Status",
     cell: (row) => {
       const product = row.row.original;
-      // @ts-expect-error - status is a string
+
       const label = getStatusLabel(product.status);
       return (
         <Badge
+          variant="outline"
           className={
             label === "Disponível"
-              ? "w-28 gap-1.5 bg-green-700"
-              : "w-28 gap-1.5 bg-red-700"
+              ? "w-28 gap-1.5 bg-green-700 text-white"
+              : "w-28 gap-1.5 bg-red-700 text-white"
           }
         >
           <Circle
