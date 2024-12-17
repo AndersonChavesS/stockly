@@ -33,7 +33,7 @@ const DeleteProductDialogContent = ({
       <AlertDialogHeader>
         <AlertDialogTitle>Você tem certeza?</AlertDialogTitle>
         <AlertDialogDescription>
-          Você esta prestes a excluir este produto. Esta ação não pode ser
+          Você está prestes a excluir este produto. Esta ação não pode ser
           desfeita. Deseja continuar?
         </AlertDialogDescription>
       </AlertDialogHeader>

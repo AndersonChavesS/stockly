@@ -20,7 +20,7 @@ const SalesPage = async () => {
           <span className="text-xs font-semibold text-blue-500">
             Gestão de Vendas
           </span>
-          <h2 className="text xl font-semibold">Produtos</h2>
+          <h2 className="text xl font-semibold">Vendas</h2>
         </div>
         <CreateSaleButton products={products} productOptions={productOptions} />
       </div>

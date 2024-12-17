@@ -17,12 +17,12 @@ import {
   AlertDialog,
   AlertDialogTrigger,
 } from "@/app/_components/ui/alert-dialog";
-import { Button } from "@/app/_components/ui/button";
 import DeleteProductDialogContent from "./delete-dialog-content";
 import { Dialog, DialogTrigger } from "@/app/_components/ui/dialog";
 import UpsertProductDialogContent from "./upsert-dialog-content";
 import { useState } from "react";
 import { Product } from "@prisma/client";
+import { toast } from "sonner";
 
 interface ProductTableDropdownMenuProps {
   product: Product;
@@ -31,6 +31,10 @@ interface ProductTableDropdownMenuProps {
 const ProductTableDropdownMenu = ({
   product,
 }: ProductTableDropdownMenuProps) => {
+  const handleCopyToClipboardClick = () => {
+    navigator.clipboard.writeText(product.id);
+    toast.success("ID copiado para a area de transferência.");
+  };
   const [editDialogIsOpen, setEditDialogIsOpen] = useState(false);
   return (
     <>
@@ -44,14 +48,11 @@ const ProductTableDropdownMenu = ({
               <DropdownMenuLabel>Ações</DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem
-                asChild
                 className="gap-1.5"
-                onClick={() => navigator.clipboard.writeText(product.id)}
+                onClick={handleCopyToClipboardClick}
               >
-                <Button variant="ghost">
-                  <ClipboardCopyIcon size={16} />
-                  Copiar ID
-                </Button>
+                <ClipboardCopyIcon size={16} />
+                Copiar ID
               </DropdownMenuItem>
               <DialogTrigger asChild>
                 <DropdownMenuItem className="gap-1.5">
