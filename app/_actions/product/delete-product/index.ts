@@ -13,5 +13,6 @@ export const deleteProduct = actionClient
         id,
       },
     });
-    revalidatePath("/products");
+    revalidatePath("/products","page");
+    revalidatePath("/","page");
   });
