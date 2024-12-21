@@ -17,12 +17,20 @@ import {
   SummaryCardValue,
 } from "./_components/summary-cards";
 import { formatCurrency } from "../_helpers/currency";
+import RevenueChart from "./_components/revenue-chart";
 
 const Home = async () => {
-  const { totalRevenue, todayRevenue, totalSales, totalStock, totalProducts } =
-    await getDashboard();
+  const {
+    totalRevenue,
+    todayRevenue,
+    totalSales,
+    totalStock,
+    totalProducts,
+    totalLast14DaysRevenue,
+  } = await getDashboard();
+
   return (
-    <div className="m-8 w-full space-y-8 rounded-lg">
+    <div className="mx-5 mt-5 w-full space-y-2 rounded-lg">
       <Header>
         <HeaderLeft>
           <HeaderSubTitle>Visão Geral dos Dados</HeaderSubTitle>
@@ -30,7 +38,7 @@ const Home = async () => {
         </HeaderLeft>
       </Header>
 
-      <div className="grid grid-cols-2 gap-6">
+      <div className="grid grid-cols-2 gap-2">
         <SummaryCard>
           <SummaryCardIcon>
             <DollarSign />
@@ -47,7 +55,7 @@ const Home = async () => {
         </SummaryCard>
       </div>
 
-      <div className="grid grid-cols-3 gap-6">
+      <div className="grid grid-cols-3 gap-2">
         <SummaryCard>
           <SummaryCardIcon>
             <CircleDollarSign />
@@ -69,6 +77,13 @@ const Home = async () => {
           <SummaryCardTitle>Produtos</SummaryCardTitle>
           <SummaryCardValue>{totalProducts}</SummaryCardValue>
         </SummaryCard>
+      </div>
+
+      <div className="flex h-[340px] flex-col overflow-hidden rounded-xl bg-white p-8">
+        <p className="text-lg font-semibold text-slate-500">Receita</p>
+        <p className="text-sm font-semibold text-slate-300 mb-1">Últimos 14 dias</p>
+
+        <RevenueChart data={totalLast14DaysRevenue} />
       </div>
     </div>
   );

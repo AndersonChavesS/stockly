@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 
 export const SummaryCardIcon = ({ children }: { children: ReactNode }) => {
   return (
-    <div className="mb-2 flex h-9 w-9 items-center justify-center rounded-md bg-opacity-10 text-blue-700">
+    <div className="flex w-5 items-center justify-center rounded-md bg-opacity-10 text-blue-700">
       {children}
     </div>
   );
@@ -13,9 +13,11 @@ export const SummaryCardTitle = ({ children }: { children: ReactNode }) => {
 };
 
 export const SummaryCardValue = ({ children }: { children: ReactNode }) => {
-  return <p className="text-2xl font-semibold text-slate-900">{children}</p>;
+  return <p className="text-xl font-semibold text-slate-900">{children}</p>;
 };
 
 export const SummaryCard = ({ children }: { children: ReactNode }) => {
-  return <div className="rounded-xl bg-slate-100 p-6">{children}</div>;
+  return (
+    <div className="h-auto w-full rounded-xl bg-slate-100 p-5">{children}</div>
+  );
 };
