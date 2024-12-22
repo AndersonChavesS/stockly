@@ -24,34 +24,36 @@ export const getDashboard = async (): Promise<DashboardDto> => {
   );
   const totalLast14DaysRevenue: DayTotalRevenue[] = [];
   for (const day of last14Days) {
-    const dayTotalRevenue = await db.$queryRawUnsafe<{ todayRevenue: number }[]>(
+    const dayTotalRevenue = await db.$queryRawUnsafe<
+      { totalRevenue: number }[]
+    >(
       `
-      SELECT SUM("UnitPrice" * "quantity") as "todayRevenue"
+      SELECT SUM("SaleProduct"."UnitPrice" * "SaleProduct"."quantity") as "totalRevenue"
       FROM "SaleProduct"
-      WHERE "createdAt" >= $1 AND "createdAt" <= $2;
+      JOIN "Sale" ON "SaleProduct"."saleId" = "Sale"."id"
+      WHERE "Sale"."date" >= $1 AND "Sale"."date" <= $2;
       `,
       day.startOf("day").toDate(),
       day.endOf("day").toDate(),
     );
-  
-    console.log("dayTotalRevenue:", dayTotalRevenue);
-  
+
     totalLast14DaysRevenue.push({
       day: day.format("DD/MM"),
-      totalRevenue: dayTotalRevenue[0]?.todayRevenue || 0, // Adicionando verificação de undefined
+      totalRevenue: dayTotalRevenue[0].totalRevenue,
     });
   }
 
   const totalRevenueQuery = `
-  SELECT SUM("UnitPrice" * "quantity") as "totalRevenue"
+  SELECT SUM("SaleProduct"."UnitPrice" * "SaleProduct"."quantity") as "totalRevenue"
   FROM "SaleProduct"
+  JOIN "Sale" ON "SaleProduct"."saleId" = "Sale"."id";
 `;
   const todayRevenueQuery = `
-  SELECT SUM("UnitPrice" * "quantity") as "todayRevenue"
+  SELECT SUM("SaleProduct"."UnitPrice" * "SaleProduct"."quantity") as "todayRevenue"
   FROM "SaleProduct"
-  WHERE "createdAt" >= $1 AND "createdAt" <= $2;
+  JOIN "Sale" ON "SaleProduct"."saleId" = "Sale"."id"
+  WHERE "Sale"."date" >= $1 AND "Sale"."date" <= $2;
 `;
-
 
   const startOfDay = new Date(new Date().setHours(0, 0, 0, 0));
   const endOfDay = new Date(new Date().setHours(23, 59, 59, 999));
