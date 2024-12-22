@@ -1,9 +1,5 @@
 import { getDashboard } from "../_data-access/dashboard/get-dashboard";
-import {
-  CircleDollarSign,
-  PackageCheckIcon,
-  ShoppingBasketIcon,
-} from "lucide-react";
+import { PackageCheckIcon, ShoppingBasketIcon } from "lucide-react";
 import Header, {
   HeaderLeft,
   HeaderSubTitle,
@@ -21,11 +17,11 @@ import MostSoldProductItem from "./_components/most-sold-product-item";
 import TotalRevenueCard from "./_components/total-revenue-card";
 import { Suspense } from "react";
 import { Skeleton } from "../_components/ui/skeleton";
-import TodayRevenue from "./_components/today-revenue";
+import TodayRevenueCard from "./_components/today-revenue-card";
+import TotalSalesCard from "./_components/total-sales-card";
 
 const Home = async () => {
   const {
-    totalSales,
     totalStock,
     totalProducts,
     totalLast14DaysRevenue,
@@ -42,31 +38,20 @@ const Home = async () => {
       </Header>
 
       <div className="grid grid-cols-2 gap-2">
-        <Suspense
-          fallback={
-            <Skeleton className="rounded-xl bg-slate-50 bg-opacity-75" />
-          }
-        >
+        <Suspense fallback={<SummaryCardSkeleton />}>
           <TotalRevenueCard />
         </Suspense>
 
-        <Suspense
-          fallback={
-            <Skeleton className="rounded-xl bg-slate-50 bg-opacity-75" />
-          }
-        >
-          <TodayRevenue />
+        <Suspense fallback={<SummaryCardSkeleton />}>
+          <TodayRevenueCard />
         </Suspense>
       </div>
 
       <div className="grid grid-cols-3 gap-2">
-        <SummaryCard>
-          <SummaryCardIcon>
-            <CircleDollarSign />
-          </SummaryCardIcon>
-          <SummaryCardTitle>Vendas Totais</SummaryCardTitle>
-          <SummaryCardValue>{totalSales}</SummaryCardValue>
-        </SummaryCard>
+        <Suspense fallback={<SummaryCardSkeleton />}>
+          <TotalSalesCard />
+        </Suspense>
+
         <SummaryCard>
           <SummaryCardIcon>
             <PackageCheckIcon />
@@ -74,6 +59,7 @@ const Home = async () => {
           <SummaryCardTitle>Total em estoque</SummaryCardTitle>
           <SummaryCardValue>{totalStock}</SummaryCardValue>
         </SummaryCard>
+
         <SummaryCard>
           <SummaryCardIcon>
             <ShoppingBasketIcon />
@@ -109,3 +95,15 @@ const Home = async () => {
 };
 
 export default Home;
+
+export const SummaryCardSkeleton = () => {
+  return (
+    <Skeleton className="h-full w-full rounded-xl bg-white bg-opacity-75">
+      <div className="w-full space-y-2 pb-4 pt-4">
+        <Skeleton className="ml-5 mt-2 h-6 w-6 rounded-lg bg-blue-100" />
+        <Skeleton className="ml-5 h-4 w-32 bg-blue-100" />
+        <Skeleton className="mb-4 ml-5 h-6 w-48 bg-blue-100" />
+      </div>
+    </Skeleton>
+  );
+};

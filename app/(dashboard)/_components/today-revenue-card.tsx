@@ -8,7 +8,7 @@ import {
 import { formatCurrency } from "@/app/_helpers/currency";
 import { DollarSign } from "lucide-react";
 
-const TodayRevenue = async () => {
+const TodayRevenueCard = async () => {
   const todayRevenue = await getTodayRevenue();
   return (
     <SummaryCard>
@@ -21,4 +21,4 @@ const TodayRevenue = async () => {
   );
 };
 
-export default TodayRevenue;
+export default TodayRevenueCard;
