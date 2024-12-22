@@ -1,5 +1,5 @@
 import { getDashboard } from "../_data-access/dashboard/get-dashboard";
-import { PackageCheckIcon, ShoppingBasketIcon } from "lucide-react";
+import { ShoppingBasketIcon } from "lucide-react";
 import Header, {
   HeaderLeft,
   HeaderSubTitle,
@@ -19,10 +19,11 @@ import { Suspense } from "react";
 import { Skeleton } from "../_components/ui/skeleton";
 import TodayRevenueCard from "./_components/today-revenue-card";
 import TotalSalesCard from "./_components/total-sales-card";
+import TotalStockCard from "./_components/total-stock-card";
 
 const Home = async () => {
   const {
-    totalStock,
+  
     totalProducts,
     totalLast14DaysRevenue,
     mostSoldProducts,
@@ -52,13 +53,9 @@ const Home = async () => {
           <TotalSalesCard />
         </Suspense>
 
-        <SummaryCard>
-          <SummaryCardIcon>
-            <PackageCheckIcon />
-          </SummaryCardIcon>
-          <SummaryCardTitle>Total em estoque</SummaryCardTitle>
-          <SummaryCardValue>{totalStock}</SummaryCardValue>
-        </SummaryCard>
+        <Suspense fallback={<SummaryCardSkeleton />}>
+          <TotalStockCard />
+        </Suspense>
 
         <SummaryCard>
           <SummaryCardIcon>
