@@ -13,7 +13,7 @@ const ProductsPage = async () => {
   const products = await getProducts();
 
   return (
-    <div className="m-8 w-full space-y-8 rounded-lg bg-slate-100 p-8">
+    <div className="m-8 w-full space-y-8 rounded-lg bg-slate-100 p-8 overflow-y-auto">
       <Header>
         <HeaderLeft>
           <HeaderSubTitle> Gestão de Produtos</HeaderSubTitle>
