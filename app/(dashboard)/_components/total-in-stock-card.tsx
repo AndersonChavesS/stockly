@@ -5,19 +5,19 @@ import {
   SummaryCardTitle,
   SummaryCardValue,
 } from "./summary-cards";
-import { getTotalStock } from "@/app/_data-access/dashboard/get-total-stock";
+import { getTotalInStock } from "@/app/_data-access/dashboard/get-total-in-stock";
 
-const TotalStockCard = async () => {
-  const totalStock = await getTotalStock();
+const TotalInStockCard = async () => {
+  const totalInStock = await getTotalInStock();
   return (
     <SummaryCard>
       <SummaryCardIcon>
         <PackageCheckIcon />
       </SummaryCardIcon>
       <SummaryCardTitle>Total em estoque</SummaryCardTitle>
-      <SummaryCardValue>{totalStock}</SummaryCardValue>
+      <SummaryCardValue>{totalInStock}</SummaryCardValue>
     </SummaryCard>
   );
 };
 
-export default TotalStockCard;
+export default TotalInStockCard;

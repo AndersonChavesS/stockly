@@ -1,17 +1,9 @@
 import { getDashboard } from "../_data-access/dashboard/get-dashboard";
-import { ShoppingBasketIcon } from "lucide-react";
 import Header, {
   HeaderLeft,
   HeaderSubTitle,
   HeaderTitle,
 } from "../_components/header";
-import {
-  SummaryCard,
-  SummaryCardIcon,
-  SummaryCardTitle,
-  SummaryCardValue,
-} from "./_components/summary-cards";
-
 import RevenueChart from "./_components/revenue-chart";
 import MostSoldProductItem from "./_components/most-sold-product-item";
 import TotalRevenueCard from "./_components/total-revenue-card";
@@ -19,15 +11,11 @@ import { Suspense } from "react";
 import { Skeleton } from "../_components/ui/skeleton";
 import TodayRevenueCard from "./_components/today-revenue-card";
 import TotalSalesCard from "./_components/total-sales-card";
-import TotalStockCard from "./_components/total-stock-card";
+import TotalInStockCard from "./_components/total-in-stock-card";
+import TotalProductsCard from "./_components/total-products-card";
 
 const Home = async () => {
-  const {
-  
-    totalProducts,
-    totalLast14DaysRevenue,
-    mostSoldProducts,
-  } = await getDashboard();
+  const { totalLast14DaysRevenue, mostSoldProducts } = await getDashboard();
 
   return (
     <div className="mx-5 mt-5 w-full space-y-2 rounded-lg">
@@ -54,16 +42,12 @@ const Home = async () => {
         </Suspense>
 
         <Suspense fallback={<SummaryCardSkeleton />}>
-          <TotalStockCard />
+          <TotalInStockCard />
         </Suspense>
 
-        <SummaryCard>
-          <SummaryCardIcon>
-            <ShoppingBasketIcon />
-          </SummaryCardIcon>
-          <SummaryCardTitle>Produtos</SummaryCardTitle>
-          <SummaryCardValue>{totalProducts}</SummaryCardValue>
-        </SummaryCard>
+        <Suspense fallback={<SummaryCardSkeleton />}>
+          <TotalProductsCard />
+        </Suspense>
       </div>
       <div className="grid min-h-0 grid-cols-[minmax(0,2.5fr),minmax(0,1fr)] gap-2">
         <div className="flex h-[340px] flex-col overflow-hidden rounded-xl bg-white p-6">

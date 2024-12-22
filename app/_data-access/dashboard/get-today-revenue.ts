@@ -1,10 +1,8 @@
-import "server-only"
+import "server-only";
 
 import { db } from "@/app/_lib/prisma";
 
 export const getTodayRevenue = async (): Promise<number> => {
-  await new Promise((resolve) => setTimeout(resolve, 3000));
-
   const todayRevenueQuery = `
     SELECT SUM("SaleProduct"."UnitPrice" * "SaleProduct"."quantity") as "todayRevenue"
     FROM "SaleProduct"
