@@ -6,7 +6,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/app/_components/ui/chart";
-import { DayTotalRevenue } from "@/app/_data-access/dashboard/get-dashboard";
+import { DayTotalRevenueDto } from "@/app/_data-access/dashboard/get-last-14-days-revenue";
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts";
 
 const chartConfig = {
@@ -16,12 +16,12 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 interface RevenueChartProps {
-  data: DayTotalRevenue[];
+  data: DayTotalRevenueDto[];
 }
 
 const RevenueChart = ({ data }: RevenueChartProps) => {
   return (
-    <ChartContainer config={chartConfig} className="h-[290px] w-full">
+    <ChartContainer config={chartConfig} className="h-[280px] w-full">
       <BarChart accessibilityLayer data={data}>
         <YAxis
           dataKey="totalRevenue"
@@ -32,7 +32,7 @@ const RevenueChart = ({ data }: RevenueChartProps) => {
         <CartesianGrid vertical={false} />
         <XAxis dataKey="day" tickLine={false} tickMargin={5} axisLine={false} />
         <ChartTooltip content={<ChartTooltipContent />} />
-        <Bar dataKey="totalRevenue" radius={4} fill="#0000aa"/>
+        <Bar dataKey="totalRevenue" radius={4} fill="#0000aa" />
       </BarChart>
     </ChartContainer>
   );
