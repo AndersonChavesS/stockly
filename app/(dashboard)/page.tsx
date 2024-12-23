@@ -1,4 +1,3 @@
-import { getDashboard } from "../_data-access/dashboard/get-dashboard";
 import Header, {
   HeaderLeft,
   HeaderSubTitle,
@@ -13,10 +12,9 @@ import TotalSalesCard from "./_components/total-sales-card";
 import TotalInStockCard from "./_components/total-in-stock-card";
 import TotalProductsCard from "./_components/total-products-card";
 import TotalLast14DaysRevenueCard from "./_components/total-last-14-days-revenue-card";
+import MostSoldProductsCard from "./_components/most-sold-products";
 
 const Home = async () => {
-  const { mostSoldProducts } = await getDashboard();
-
   return (
     <div className="mx-5 mt-5 w-full space-y-2 rounded-lg">
       <Header>
@@ -64,16 +62,20 @@ const Home = async () => {
           <TotalLast14DaysRevenueCard />
         </Suspense>
 
-        <div className="flex h-[340px] flex-col overflow-hidden rounded-xl bg-white py-6">
-          <p className="px-4 py-6 text-xl font-semibold text-blue-700">
-            Produtos Mais Vendidos
-          </p>
+        <div>
+          <Suspense
+            fallback={
+              <Skeleton className="h-[333px] w-full space-y-2 rounded-xl bg-white pt-10">
+                <Skeleton className="ml-4 h-8 w-60 bg-blue-100" />
 
-          <div className="mt-1 space-y-6 overflow-y-auto px-4 pb-2">
-            {mostSoldProducts.map((product) => (
-              <MostSoldProductItem key={product.productId} product={product} />
-            ))}
-          </div>
+                <MostProductCardSkeleton />
+                <MostProductCardSkeleton />
+                <MostProductCardSkeleton />
+              </Skeleton>
+            }
+          >
+            <MostSoldProductsCard />
+          </Suspense>
         </div>
       </div>
     </div>
@@ -91,5 +93,20 @@ export const SummaryCardSkeleton = () => {
         <Skeleton className="mb-4 ml-5 h-6 w-48 bg-blue-100" />
       </div>
     </Skeleton>
+  );
+};
+
+export const MostProductCardSkeleton = () => {
+  return (
+    <div className="flex items-center justify-between">
+      <div>
+        <Skeleton className="ml-4 mt-5 h-5 w-28 rounded-full bg-blue-100" />
+        <Skeleton className="ml-4 mt-3 h-6 w-16 bg-blue-100" />
+        <Skeleton className="ml-4 mt-3 h-6 w-24 bg-blue-100" />
+      </div>
+      <div>
+        <Skeleton className="mr-8 mt-6 h-6 w-24 bg-blue-100" />
+      </div>
+    </div>
   );
 };

@@ -1,5 +1,6 @@
 import ProductStatusBadge from "@/app/_components/product-status-badge";
-import { MostSoldProductDto } from "@/app/_data-access/dashboard/get-dashboard";
+import { MostSoldProductDto } from "@/app/_data-access/dashboard/get-most-sold-products";
+
 import { formatCurrency } from "@/app/_helpers/currency";
 
 interface MostSoldProductProps {
@@ -10,7 +11,7 @@ const MostSoldProductItem = ({ product }: MostSoldProductProps) => {
   return (
     <div className="flex items-center justify-between">
       <div className="space-y-[6px]">
-        <ProductStatusBadge status={product.status}/>
+        <ProductStatusBadge status={product.status} />
         <p className="font-semibold text-blue-900">{product.name}</p>
         <p className="font-medium text-blue-300">
           {formatCurrency(Number(product.price))}
