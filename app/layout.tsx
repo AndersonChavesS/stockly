@@ -21,14 +21,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-br">
-      <Head>
-        <link
-          rel="shortcut icon"
-          href="./stocky-favicon.png"
-          type="image/x-icon"
-        />
-      </Head>
+    <html lang="pt-br"> 
       <body className={`${inter.className} antialiased`}>
         <div className="flex h-full bg-blue-100">
           <Sidebar />
