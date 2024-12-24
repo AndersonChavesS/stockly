@@ -30,7 +30,7 @@ import {
 } from "@/app/_components/ui/table";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CheckIcon, PlusIcon } from "lucide-react";
-import { Dispatch, SetStateAction, useMemo, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { formatCurrency } from "../../_helpers/currency";
@@ -60,6 +60,7 @@ interface SelectedProduct {
 }
 
 interface UpsertSheetContentProps {
+  isOpen: boolean;
   saleId?: string;
   products: ProductDto[];
   productOptions: ComboboxOption[];
@@ -68,6 +69,7 @@ interface UpsertSheetContentProps {
 }
 
 const UpsertSheetContent = ({
+  isOpen,
   saleId,
   products,
   productOptions,
@@ -99,6 +101,16 @@ const UpsertSheetContent = ({
   const messageErrorStock =
     "A quantidade solicitada excede o estoque disponível.";
 
+  useEffect(() => {
+    if (!isOpen) {
+      setSelectedProducts([]);
+    }
+  }, [, form, isOpen]);
+
+  useEffect(() => {
+    setSelectedProducts(defaultSelectedProducts ?? []);
+  }, [defaultSelectedProducts]);
+
   const onSubmit = (data: FormSchema) => {
     const selectedProduct = products.find(
       (product) => product.id === data.productId,
@@ -112,13 +124,13 @@ const UpsertSheetContent = ({
         const productIsOutOfStock =
           existingProduct.quantity + data.quantity > selectedProduct.stock;
         if (productIsOutOfStock) {
+          form.reset(); 
           form.setError("quantity", {
             message: messageErrorStock,
           });
 
           setTimeout(() => {
             form.clearErrors("quantity");
-            form.reset();
           }, 3000);
 
           return currentProducts;
@@ -127,18 +139,21 @@ const UpsertSheetContent = ({
           if (product.id === selectedProduct.id) {
             return { ...product, quantity: product.quantity + data.quantity };
           }
+          form.reset(); 
           return product;
         });
+       
       }
       const productIsOutOfStock = data.quantity > selectedProduct.stock;
       if (productIsOutOfStock) {
+        form.reset(); 
         form.setError("quantity", {
           message: messageErrorStock,
         });
+       
 
         setTimeout(() => {
           form.clearErrors("quantity");
-          form.reset();
         }, 3000);
         return currentProducts;
       }
@@ -151,6 +166,7 @@ const UpsertSheetContent = ({
         },
       ];
     });
+    form.reset(); 
   };
 
   const productsTotal = useMemo(() => {

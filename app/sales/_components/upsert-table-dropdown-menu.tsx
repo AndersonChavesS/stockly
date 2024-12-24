@@ -22,7 +22,10 @@ interface UpsertSaleTableDropdowMenuProps {
   onDelete: (productId: string) => void;
 }
 
-const UpsertSaleTableDropdowMenu = ({ product,onDelete }: UpsertSaleTableDropdowMenuProps) => {
+const UpsertSaleTableDropdowMenu = ({
+  product,
+  onDelete,
+}: UpsertSaleTableDropdowMenuProps) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
@@ -47,7 +50,10 @@ const UpsertSaleTableDropdowMenu = ({ product,onDelete }: UpsertSaleTableDropdow
           Editar
         </DropdownMenuItem>
 
-        <DropdownMenuItem className="gap-1.5" onClick={()=>onDelete(product.id)}>
+        <DropdownMenuItem
+          className="gap-1.5"
+          onClick={() => onDelete(product.id)}
+        >
           <TrashIcon size={16} />
           Deletar
         </DropdownMenuItem>
