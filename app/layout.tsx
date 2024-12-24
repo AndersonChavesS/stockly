@@ -6,7 +6,7 @@ import { Toaster } from "sonner";
 import Head from "next/head";
 
 export const metadata: Metadata = {
-  title: "STOCKLY",
+  title: "Stockly",
   description: "Simple store system",
 };
 
