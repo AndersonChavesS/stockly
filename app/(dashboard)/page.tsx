@@ -3,7 +3,6 @@ import Header, {
   HeaderSubTitle,
   HeaderTitle,
 } from "../_components/header";
-import MostSoldProductItem from "./_components/most-sold-product-item";
 import TotalRevenueCard from "./_components/total-revenue-card";
 import { Suspense } from "react";
 import { Skeleton } from "../_components/ui/skeleton";
