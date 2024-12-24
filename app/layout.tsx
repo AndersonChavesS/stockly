@@ -26,7 +26,7 @@ export default function RootLayout({
       <Head>
         <link
           rel="shortcut icon"
-          href="./stockly-favicon.png"
+          href="/stockly-favicon.png"
           type="image/x-icon"
         />
       </Head>
