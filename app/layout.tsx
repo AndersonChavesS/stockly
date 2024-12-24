@@ -3,7 +3,7 @@ import "./globals.css";
 import Sidebar from "@/app/_components/sidebar";
 import { Inter } from "next/font/google";
 import { Toaster } from "sonner";
-import Head from "next/head";
+
 
 export const metadata: Metadata = {
   title: "Stockly",
